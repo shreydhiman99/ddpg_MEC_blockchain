@@ -16,20 +16,20 @@ Springer (under review)).
    state (tasks +    │   MECEnvironment         │   reward = system utility
    server features)  │   environment/mec_env.py │   (Eq. 7-10 of the paper)
        ┌──────────── │                          │ ◄───────────┐
-       │             └─────────────────────────┘             │
-       ▼                                                       │
-┌─────────────────┐   action (S×T logits)   ┌──────────────────┴──┐
-│  Agent           │ ───────────────────────►│  step(): compute    │
-│  (ddpg/td3/...)  │                          │  utility, feasi-    │
-└─────────────────┘                          │  bility, next state │
-       │                                      └──────────────────────┘
+       │             └─────────────────────────┘              │
+       ▼                                                      │
+┌─────────────────┐   action (S×T logits)   ┌─────────────────┴──────┐
+│  Agent           │ ───────────────────────►│  step(): compute      │
+│  (ddpg/td3/...)  │                         │  utility, feasi-      │
+└─────────────────┘                          │  bility, next state   │
+       │                                     └───────────────────────┘
        │ optional
        ▼
-┌─────────────────────────┐        ┌───────────────────────────────┐
+┌─────────────────────────┐        ┌─────────────────────────────────┐
 │ BlockchainLogger         │───────►│ TaskAllocation.sol (Ganache)   │
 │ environment/blockchain_  │        │ blockchain/contracts/          │
 │ logger.py                │        │ on-chain allocation + round log│
-└─────────────────────────┘        └───────────────────────────────┘
+└─────────────────────────┘        └─────────────────────────────────┘
 ```
 
 ### Environment (`environment/`)
