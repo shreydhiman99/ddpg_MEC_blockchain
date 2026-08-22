@@ -1,0 +1,1044 @@
+Optimizing Resource Sharing in Blockchain-based
+Mobile Edge Computing through Reinforcement
+Learning: A DDPG Approach
+Shrey Dhiman1*, Amita Chauhan1†, Sakshi Kaushal1†,
+Harish Kumar1†
+1*University Institute of Engineering and Technology, Panjab University,
+Sector 25, Chandigarh, 160014, Chandigarh, India.
+*Corresponding author(s). E-mail(s): shreydhiman99@gmail.com;
+Contributing authors: amita2692@gmail.com; sakshi@pu.ac.in;
+harishk@pu.ac.in;
+†These authors contributed equally to this work.
+Abstract
+Mobile Edge Computing (MEC) is a trailblazing technology that puts cloud com-
+puting capabilities closer to the consumer, allowing for quicker and more effective
+data processing. However, one of the key challenges in MEC is the efficient alloca-
+tion of resources. This paper proposes a resource allocation approach utilizing the
+technique of Deep Deterministic Policy Gradient (DDPG) within a blockchain-
+based MEC environment. Blockchain technology, known for its transparency,
+immutability, and decentralized nature, is used to store the results of computa-
+tional tasks. This ensures that all data related to resource allocation are recorded
+and verifiable, promoting fairness and accountability. Users can access the results
+of their tasks by paying a specified price, which further enhances the transparency
+and fairness of the system. The DDPG technique, a type of reinforcement learn-
+ing algorithm, is used to make intelligent decisions about task allocation. DDPG
+considers various factors such as network conditions, task requirements, and avail-
+able resources to optimally allocate tasks to edge servers. The algorithm learns
+continuously from the environment and adapts its policies to maximize perfor-
+mance. The integration of blockchain and DDPG in this research aims to create
+an efficient and secure system for resource allocation in MEC. The goal is to
+demonstrate the effectiveness of this approach through comprehensive simula-
+tions and assessments. This significantly improves the efficiency and scalability
+of mobile applications and services, leading to better user experiences and paving
+1
+the way for new applications that were not previously feasible due to resource con-
+straints. A comparative analysis with baseline algorithms, including Q-learning,
+shows that DDPG outperforms resource allocation efficiency and system perfor-
+mance. DDPG’s ability to learn optimal policies improves user experience and
+rewards. Blockchain and DDPG offer a promising solution for efficient resource
+allocation, enabling computational offloading and transparent access. The exper-
+imental analysis emphasizes DDPG’s superiority, enhancing the performance and
+scalability of mobile edge computing.
+Keywords: MEC, Blockchain, RL, Computation Offloading, DDPG
+1 Introduction
+The recent technical advancement has enabled the integration of cloud computing
+capabilities near next-generation networks, ushering in the notion of Mobile Edge
+Computing (MEC). This new computing architecture has resulted in a fundamental
+shift in the delivery of mobile services and apps, greatly improving user experiences
+and allowing revolutionary applications such as augmented reality, driverless cars,
+and the Internet of Things (IoT) [3]. Despite these developments, the MEC resource
+allocation problem remains a significant challenge, particularly in terms of optimizing
+edge server utilization and job execution efficiency.
+In order to address this resource allocation difficulty, blockchain technology has
+been adopted. With its decentralized, transparent, and secure structure, blockchain
+presents a viable option for resource distribution between edge servers in the mobile
+edge computing world. Its distinguishing features, including immutability and con-
+sensus processes, assist in the creation of a realistic environment ideal for effective
+resource management and computing task offloading in MEC.
+The idea of task offloading, or the transfer of computing workloads from mobile
+devices to edge servers [2], is critical for improving resource allocation in MEC.
+Notably, Reinforcement Learning (RL), particularly the Deep Deterministic Policy
+Gradient (DDPG) algorithm, has emerged as a powerful tool for dynamically assign-
+ing workloads [21] to edge servers while accounting for computational power, energy
+efficiency, and network circumstances.
+The focal point of this study is to develop a blockchain-oriented mobile edge
+computing system for efficient resource allocation. The DDPG algorithm is used to
+implement task offloading in this framework. The major goal is to use blockchain’s
+decentralized capabilities to create an efficient and secure solution [19] that optimizes
+resource allocation in MEC situations. Furthermore, the combination of blockchain
+with DDPG enables intelligent task-offloading decision-making by taking into account
+factors such as server load, network latency, and energy usage. The final goal is to
+prove the efficacy and benefits of the suggested technique through extensive simula-
+tions and assessments, ultimately improving resource utilization and overall system
+performance in MEC scenarios.
+2
+Although previous research has looked into the potential of blockchain technology
+in MEC and the advantages of the DDPG algorithm for task offloading, there is still a
+lack of comprehensive research into how the combination of these two technologies can
+optimize resource allocation in MEC. In particular, it is unknown how the properties
+of blockchain and the decision-making skills of DDPG might interact and complement
+each other to maximize system performance. The integration of blockchain and rein-
+forcement learning techniques holds great promise for addressing the data storage[12]
+and resource allocation challenges in mobile edge computing.
+This research study presents three significant contributions to the field of Mobile
+Edge Computing (MEC) by integrating blockchain technology and applying an
+intelligent task-offloading algorithm.
+1. The initial contribution is the creation of a blockchain-based MEC platform
+designed specifically for resource distribution. Blockchain technology, known for
+its decentralized, transparent, and secure architecture, has been used to develop
+a reliable and efficient resource management platform in the MEC system. Uti-
+lizing the blockchain to make use of its unique qualities, such as immutability
+and consensus procedures, to facilitate secure and transparent transactions. This
+blockchain-based architecture provides efficient resource distribution among edge
+servers, resulting in enhanced MEC utilization and efficiency.
+2. The second contribution uses the Deep Deterministic Policy Gradient (DDPG)
+technique for task offloading. The technique of shifting computing work from
+mobile devices to edge servers, known as task offloading, is crucial in improving
+resource allocation. Based on edge servers’ computational power, energy effi-
+ciency, and network circumstances, the DDPG algorithm, has been successful
+in dynamically assigning tasks to them. This improves system performance and
+boosts overall efficiency.
+3. The suggested strategy’s validation through thorough simulations and assess-
+ments is the third and final contribution. The suggested blockchain-based MEC
+platform’s performance as well as task offloading with the DDPG algorithm are
+thoroughly tested and assessed. These evaluations demonstrate the approach’s
+practical viability and efficacy by highlighting its potential to enhance resource
+usage and overall system performance in MEC settings.
+The remainder of the paper is structured as follows. Section 2 provides a literature
+review of the methods and techniques present in state-of-the-art. Section 3 presents
+a detailed description of the system model. Section 4 presents the task assignment
+mechanism and problem formulation. Section 5 provides the solution for the MTAO
+problem using the DDPG approach. Results and analysis of the experiments performed
+are presented in Section 6. Section 7 concludes the paper.
+2 Related Work
+Numerous approaches have been developed to enhance blockchain-based resource shar-
+ing in mobile edge computing. Edge computing for mobile blockchain applications is a
+novel idea introduced by Zehui Xiong et al [26]. The authors suggest using mobile edge
+computing (MEC) to help mobile users solve proof-of-work (PoW) problems in order to
+3
+circumvent blockchain’s resource constraints on devices with limited processing power.
+They provide an economic strategy for managing edge computing resources, in which
+the service provider seeks to maximize profit through pricing and miners weigh incen-
+tives and costs when determining the computing services they need. A Stackelberg
+game is used to simulate the interaction between the provider and the miners. The
+authors create a working prototype of a mobile edge computing system for blockchain
+technology and suggest fee structures for the offered services. According to experimen-
+tal findings, higher demand for edge computing services increases the likelihood that a
+block will be successfully mined. Overall, the study contributes a unique idea for edge
+computing for mobile blockchain, gives a prototype system, discusses an economical
+method for resource management, and includes experimental data to validate the idea.
+A methodology for cooperative computation offloading and resource allocation for
+blockchain-enabled MEC systems is described by Jie Feng et al [5]. On concurrently
+optimizing cooperative offloading decisions, power allocation, block size, and block
+interval, the authors solve the issue of maximizing the computed rate of the MEC
+system and transaction throughput of the blockchain system. The problem is repre-
+sented as a Markov Decision Process (MDP), taking into consideration the dynamic
+properties of wireless channels and the resources that are accessible. The authors sug-
+gest an Asynchronous Advantage Actor-Critic (A3C) technique, which can steadily
+train neural networks, to address the MDP problem. The simulation results show
+that the proposed method performs well under various parameter settings, with quick
+convergence and superior performance over existing algorithms.
+An overview of the federated learning and blockchain integration in mobile edge
+computing (MEC) networks is provided by Dinh C. Nguyen et al [14]. The authors
+highlight the drawbacks of conventional AI methods and suggest FL as a workaround
+that would allow for cooperative training of a shared AI model without sacrificing
+data privacy. The authors offer the idea of FLchain, which blends FL with blockchain
+to produce decentralized, safe, and privacy-enhancing intelligent MEC systems, to
+increase security and scalability. The study discusses technical issues with FLchain
+architecture and looks at how it might be used in a number of MEC fields, includ-
+ing crowdsensing, content caching, and edge data exchange. The authors also point
+out important fixes for issues including communication costs, resource distribution,
+motivational systems, and security and privacy protection.
+A novel effective lightweight RFID-based authentication mechanism for supply
+chains in a 5G mobile edge computing environment is proposed by Srinivas Jangirala
+et al [7]. The authors contend that their protocol offers a better trade-off between
+security and functionality features, communication, and computing costs than existing
+protocols and is safe against a variety of assaults.LBRAPS, the suggested protocol, is
+intended to be both effective and secure. The initialization phase and the authentica-
+tion and key setup phase make up its two distinct sections. The protocol guarantees
+forward secrecy, mutual authentication, session key formation, user anonymity, and
+untraceability. Additionally, it is resistant to both internal and external assaults, such
+as replay attacks, man-in-the-middle attacks, reader impersonation attacks, and tag
+impersonation attacks. Using the AVISPA tool, the authors also carried out a formal
+security study, which verified that the protocol is secure against current threats. The
+4
+computational expense of the protocol is looked at as well, and it is shown that this
+cost is lower than that of other current systems.
+In order to align the incentives of stakeholders in a crowd-intelligence environ-
+ment, Jinliang Xu et al. [27] suggest a reward-penalty paradigm. The authors use a
+large number of edge servers in the mobile edge computing network to implement
+predetermined rules using blockchain smart contracts. The platform, employees, and
+task publisher are said to be the three stakeholders in a crowd-intelligence ecosys-
+tem. These parties may not trust one another, and their interests may collide. The
+authors suggest a reward-penalty paradigm to handle this issue and align the incen-
+tives of the parties. On several edge servers of the mobile edge computing network,
+which together serve as a trustless hybrid human-machine crowd-intelligence plat-
+form, the preset rules are executed using blockchain smart contracts. Additionally,
+the authors demonstrate that there is just a single strong Nash equilibrium that
+may maximize the objectives of the edge servers engaged and expand the ecosystem.
+Experiments and theoretical studies both support the suggested methodology. The
+suggested blockchain-enabled trustless crowd-intelligence ecosystem, according to the
+authors, can significantly reduce network congestion and expand the ecosystem. In
+order to align the interests of stakeholders in a crowd-intelligence ecosystem, this study
+proposes a reward-penalty model.
+In scenarios involving Mobile Edge Computing (MEC), Shuyun Luo et al. [13] sug-
+gest a novel architecture for dynamically offloading user workloads. The design makes
+use of drones to store IoT device data dynamically and send it to MEC servers that are
+a member of a private blockchain network. With this method, possible limitations in
+existing systems are solved, including reduced power consumption at endpoint devices,
+a decreased need to transport data that is security-sensitive to a cloud platform, and
+a reduced necessity for network bandwidth between the Internet of Things device and
+the cloud platform. The report also presents a blockchain network to enable MEC ser-
+vice providers to become more visible and gain consumers’ confidence. The suggested
+system provides a number of benefits, including affordability, accessibility, reliability,
+and visibility. In this research, a novel decentralized offloading design for the Drone-
+aided MEC (DMEC) system is presented. Additionally, a new smart contract that is
+compatible with the DMEC system’s offloading rules is introduced, and simulation
+results are shown to show that the suggested design is feasible in real-world DMEC
+scenarios.
+A thorough analysis of consensus methods and scaling strategies in blockchain
+systems for mobile edge computing (MEC) is provided by J. P. Queralta and Tomi
+Westerlund [18]. The authors explore both old and new blockchain platforms as they
+assess various options and discuss their potential for controlling MEC services. Due to
+its established smart contract structure, they highlighted Ethereum as being widely
+used in the Internet of Things while also pointing out the promise of Hyperledger
+and IOTA. The chapter investigates the use of blockchain in the establishment of
+marketplaces, identity management, security, and resource orchestration for MEC.
+Additionally, the applications of particular frameworks like EdgeChain are covered.
+The authors highlight the applicability of Ethereum, Hyperledger, and IOTA for a
+5
+variety of use cases as they analyze the advantages and disadvantages of consensus
+protocols and distributed ledger technology solutions in their conclusion.
+The ideal way to allocate computational resources in a Mobile Edge Computing
+(MEC) environment powered by blockchain is investigated by Yuan Wu et al. [25]. The
+authors put up a hypothetical situation in which mobile terminals (MTs) purchase
+processing power from edge servers in order to mine blockchains, with the goal of
+increasing net rewards while preserving fairness among the MTs. For each MT to find
+its own ideal computational resources, the authors frame an optimization problem and
+provide effective distributed algorithms. The algorithms’ ability to handle scenarios
+involving single and several edge servers is proven by a large body of numerical data.
+The results show that the suggested algorithms perform better than equal-allocation
+strategies, principally because the computational resources at the various edge servers
+were allocated appropriately.
+In multi-server edge computing, Dinh C. Nguyen et al. [16] describe a unique
+method for latency minimization for blockchain-based federated learning (BFL). To
+manage both machine learning (ML) model training and block mining simultaneously,
+the authors suggest a system in which distributed mobile devices (MDs) communi-
+cate with a group of edge servers (ESs). They create an offloading technique that
+allows MDs to send data to an associated ES. Based on a consensus process to cre-
+ate a global ML model via peer-to-peer (P2P)-based blockchain communications, a
+new decentralized ML model aggregation approach at the edge layer is suggested. The
+quick eradication of manipulated models brought on by poisoning assaults is made
+possible by the usage of blockchain to foster trust between MDs and ESs and to enable
+trustworthy ML model sharing and cooperative consensus creation. The data offload
+decisions, MDs’ transmit power, channel bandwidth allocation for MDs’ data offload-
+ing, MDs’ computational distribution, and hash power allocation are all jointly taken
+into account by the authors’ latency-aware BFL optimization, which aims to reduce
+system latency. They provide a brand-new deep reinforcement learning method that
+uses a benefit actor-critic algorithm that is parameterized. The convergence character-
+istics of BFL in terms of aggregation latency, mini-batch size, and the amount of P2P
+communication rounds are also theoretically analyzed by the authors. The numerical
+analysis shows that the proposed method is better than the baseline models.
+Especially when it comes to the Metaverse, Yitong Wang and Jun Zhao [22] exam-
+ine the computational paradigms that are employed to satisfy the demanding needs
+of contemporary applications. The authors stress the impact of caching and Software-
+Defined Networking (SDN) in lowering latency and enhancing Quality of Service (QoS)
+in their discussion of the significance of mobility control in Mobile Edge Computing
+(MEC) systems. The article also explores MEC’s uses in the Metaverse, a newly devel-
+oping online environment where users may carry out daily tasks and create fictitious
+social networks. The necessity for MEC in the Metaverse is discussed by the authors,
+who draw attention to the shortcomings of traditional computing paradigms in man-
+aging complex computing jobs and data connection delays. They contend that MEC
+can optimize the user experience in the Metaverse by balancing the trade-off between
+processing delay, transmission delay, and power use. The authors also talk about how
+6
+new technologies, such as blockchain, AI, and 6G wireless communications, are con-
+verging with MEC. They see a scenario where MEC is employed for the Metaverse via
+6G wireless connectivity, offering a realistic and immersive performance. The promise
+of MEC, together with AI and blockchain, is highlighted in the paper’s conclusion as
+a means of creating the Metaverse through 6G communications.
+A unique method for exchanging and monitoring safe, immutable spectrum data
+is presented by Yang Jian et al. [8]. The authors suggest a spectrum blockchain for
+the Internet of Spectrum devices (IoSD) that is mobile edge computing (MEC) capa-
+ble. The system’s three-stage consensus process ensures safe and immutable data
+sharing while handling secure and unchangeable spectrum information tracking and
+sharing. The consensus process is meant to protect against dishonest actions like fal-
+sifying spectrum data. The suggested method makes use of edge-deployed personal
+wireless devices for effective storing of large amounts of spectrum data and rapid reac-
+tion to modification of the spectrum strategy. The proposed MEC-enabled spectrum
+blockchain’s security performance is evaluated by the authors, who demonstrate that
+the consensus process identifies harmful actions with a high chance of detection in a
+variety of circumstances. The merits of the MEC-enabled spectrum blockchain, such
+as the security and immutability it offers, as well as the effective storage and rapid
+reaction it enables, are highlighted in the paper’s conclusion.
+In a system design for mobile edge computing (MEC), Xinzhe Zheng et al. [29] look
+at the resource allocation issue. The Proof of Learning (PoL) consensus process that
+the authors suggest avoids wasting the computational power of edge computing servers.
+The system is statistically modeled, with an emphasis on delay in the server and mining
+processes, rewards within the new consensus, and overall cost. To make the resource
+allocation strategy as efficient as possible, the Asynchronous Advantage Actor-Critic
+(A3C) method is employed. The Temporal Convolutional Network (TCN) is used for
+representing the policy function and state-value function in the reinforcement learning
+model in order to more accurately capture the long-term trend of the system. The
+outcomes demonstrate that the TCN-based A3C algorithm converges more quickly
+and is more stable.
+For a Mobile Edge Computing (MEC) system, Dinh C. Nguyen et al. [15] present
+a unique collaborative task offloading and blockchain mining (TOBM) approach and
+use a distributed deep reinforcement learning approach. Offloading utility and min-
+ing utility are both taken into account when the writers develop the system utility.
+Through the optimization of offloading rules, mining strategies, and CPU resource
+allocation, they seek to maximize the overall system’s usefulness. The authors suggest
+a collaborative multi-agent deep deterministic policy gradient (MA-DDPG) system
+to do this, in which each edge device (ED) functions as an intelligent agent that
+learns its ideal policy through observation of the local environment created by the
+collaboration of EDs and the MEC server. The authors use a centralized method of
+learning and decentralized execution technique to lessen computing complexity and
+deal with nonstationary difficulties. As a result, channel congestion is decreased, and
+compute resource efficiency is increased. This enables EDs to jointly develop cooper-
+ative offloading rules. Numerical simulations are run to gauge how well the suggested
+TOBM method works. The outcomes show that the scheme works better than the
+7
+benchmark schemes, producing larger average system rewards. The suggested method
+encourages EDs to learn from one another, which improves system performance in
+terms of decreased interference, traffic, and resource efficiency.
+In order to maximize the scalability of blockchain systems supported by Mobile
+Edge Computing (MEC) in Internet of Things (IoT) networks, Zhuoer Hu et al. [6]
+suggest a revolutionary technique. The authors provide a method for offloading com-
+putations and allocating resources that improve scalability while maintaining data
+security and system effectiveness. The authors describe the optimization issue as a
+Markov decision process (MDP) and use a deep deterministic policy gradient (DDPG)
+technique to solve it in order to meet the dynamic and complicated character of IoT
+networks. The complexity and dynamics of the system are successfully handled by
+this method. The authors use simulations to show that, in terms of long-term trans-
+actional throughput, their system beats deep Q network (DQN)-based schemes and
+other greedy techniques. The suggested system’s transaction processing is also cov-
+ered in the article, and two approaches—an online model and an offline model—are
+presented. While the offline strategy uses a lightning network with smart contracts
+outside of the blockchain system, the online model includes publishing transactions to
+a global ledger on the blockchain platform.
+3 Proposed System Model
+3.1 System Architecture
+The distributed edge resource-sharing platform, aims to support high-end mobile
+applications. The system is made up of MEC servers, a consortium blockchain
+that employs practical Byzantine fault tolerance (PBFT) [28] consensus, and mobile
+devices as users. In this context, the users as devices that send offloading requests
+to MEC servers. To uniquely identify each offloading task based on its arrival time
+a unique task identifier is given on the blockchain network. Precisely, define the set
+k = {k1, ..., ki, ..., km} to illustrate the offloading of user tasks, where m is the total
+number of task that needs to be offloaded. Additionally, the set c = {c1, ..., ci, ..., cn},
+indicates the group of MEC servers that are currently active in the system, where n
+stands for the entire set of servers. This platform aims to facilitate efficient resource
+sharing and utilization for mobile applications by leveraging blockchain technology
+and edge computing resources. The blockchain ensures transparency, immutability,
+and trust among the participating entities, while the MEC servers provide the nec-
+essary computing power and low-latency processing required for mobile applications.
+The following is an outline of the suggested system’s workflow:
+• Upload of Data: Users of high-end mobile applications submit their unprocessed
+information task definitions to the most immediate MEC servers. The task
+description of task ki is denoted as Ni < bi, Mi, ψu,i >, where bi represents the
+price associated with a single CPU cycle for completing task ki, Mi describes the
+volume of data for ki, and ψu,i signifies the time duration required to finish ki.
+• Task Allocation: When a server cj acquires the data Ni from end users, it saves
+the info locally and then submits Ni for task distribution to the blockchain.
+8
+• Offloading and Computing: based on the outcome of the task allocation, server
+cj either dispatches the received task data to appropriate servers or performs the
+computing tasks locally. After starting the assigned tasks, the servers broadcast
+the computational output to the blockchain network.
+• Payment of Tasks: Users use the blockchain network to pay for computational
+costs, from where the user can subsequently acquire the calculated results. Every
+single server attains its payout as a result of the blockchain network’s cooperation.
+Asymmetric algorithms for encryption like the ”Rivest-Shamir-Adleman (RSA)”
+encryption technique [10] may be employed in this setup to secure the privacy of
+computing results. Users provide public keys created by RSA along with their offload-
+ing task requirements at the start of each round, while keeping their private keys
+confidential. After the MEC servers complete the tasks, The computed results are
+encrypted using the public keys of the associated users. Thereafter, users can access
+the blockchain, download the encrypted output, then use their private keys to decode
+them. Given that each server may get a different quantity of jobs, the tasks submitted
+by server cj are described as kc,j = {k1, k2, ..., km′}, where m′ ≤m depicts the num-
+ber of assignments from cj. For instance, if server c1 submits tasks k1, k3, and k20,
+therefore kc,1 = {k1, k3, k20}.
+3.2 Blockchain Architecture
+The consortium blockchain is housed on the MEC servers and is managed by them,
+and all of the servers are trusted, authorized nodes. Moreover, as previously cited, the
+PBFT consensus mechanism can be used for realistic Byzantine fault tolerance.[20],
+which is a lightweight consensus mechanism in the blockchain. The servers are assisted
+by this protocol in establishing consensus for producing blocks, which in turn facilitates
+the dissemination of task descriptions and allocation results. Additionally, the PBFT
+consensus protocol ensures the fair distribution of payments in an iteration-based
+manner. As a result, the MEC servers running the consortium blockchain create a
+trustworthy environment for the advanced mobile application system. The workflow
+of the distributed network using blockchain can be described as follows:
+• Each server announces its obtainable resources for finishing tasks at the begin-
+ning of each round, encompassing resources for communication and computation.
+Simultaneously, the received task descriptions Ni are uploaded to the blockchain
+ecosystem.
+• All the aforementioned details is broadcasted within the blockchain, enabling the
+head node to use the task allocation method to distribute the incoming tasks to
+relevant servers explained in the following section. A new block is created that
+contains the task descriptions, allocation choices, and MEC server resource data.
+• In the event that server cj is given the tasks it self-submitted, it can immediately
+initiate the task processing. However, if cj is tasked with offloading tasks, the
+received data must be sent to other servers that can handle the offloading tasks.
+• Upon completion of the tasks, the outcomes are announced and documented on
+the blockchain.
+• Users may use the blockchain to obtain the results, and the servers are paid in
+accordance with their contributions to the blockchain.
+9
+To sum up, the decentralized, reliable platform for resource sharing is provided by the
+blockchain in MEC-enabled high-end mobile applications[23]. This platform enables
+users of high-end mobile applications to offload computing tasks, addressing challenges
+related to limited computing capability on respective servers and device portabil-
+ity. The suggested resource-sharing platform can effectively manage several offloading
+duties in a distributed way by merging MEC and blockchain technology. However, a
+crucial aspect of this process is the technique of a task allocation mechanism. The
+mechanism is responsible for assigning offloading tasks to suitable MEC servers, ensur-
+ing maximum resource utilization while satisfying user demand. In the next section,
+comprehensive details of the job allocation method will be provided.
+4 Task Assignment Mechanism and Problem
+Formulation
+4.1 Communication Model
+If server cj submits task ki but it is not ultimately assigned to cj, then server’s
+responsibility would be limited to transmitting the data of ki to the designated server.
+Here Lj denotes the allotted bandwidth for cj data transmission, and let Oj and
+Yj represent the transmission and channel power gain, respectively. According to the
+Shannon Bound theory, the data transfer rate may be determined as:
+nj = Lj log2
+
+1 + OjYj
+σ2
+
+(1)
+where 0 ≤σ ≤1 represents the transmission’s Gaussian noise. Consequently, the
+calculation for the transmission time is:
+Kcomm
+j,i
+= Mj
+nj
+(2)
+Additionally, it is possible to calculate the energy required for data transmission as:
+U comm
+j,i
+= OjKcomm
+j,i
+(3)
+It is important to note that Lj, Oj, and Yj have been added to the blockchain network
+as cj’s communication resources that are available.
+4.2 Computation Model
+Task Ki is assigned to server cj, and the energy cost [24] can be determined by the
+formula:
+U comp
+j,i
+= αjϕj,iq2
+j
+(4)
+Here, αj reflects the CPU architecture-related parameter,
+ϕj,i = Mjσj
+(5)
+10
+ϕj,i shows how many CPU cycles were used in total to perform the tasks ki operating
+on the MEC server cj, with σj reflecting the number of CPU cycles needed to analyze
+one unit of data. In addition, qj stands for the CPU frequency used to calculate
+the offloading jobs. Moreover, the duration required for computing task ki on cj is
+calculated as:
+Kcomp
+j,i
+= ϕj,i
+qj
+(6)
+The highest amount of computer power of cj is denoted as ϕj. The parameters αj, σj,
+qi, and phijare entered into the blockchain as the cj available computing resources for
+task distribution.
+4.3 Performance Model
+Once task ki is completed, server cj will receive payment from users, represented
+as bjϕj,i, where bj is the cost per CPU cycle, and ϕj,i is the total number of CPU
+cycles spent for the task ki. The performance of server cj in the system, regarding
+the completion of ki, is based on the difference between the amount received and the
+local cost. As the task allocation for server cj can result in two possibilities, either
+computing ki locally or not, the utility of cj is affected significantly. To capture this,
+an indicator is introduced i.e., Ij,i: if ki is assigned to cj, then Ij,i = 1; otherwise,
+Ij,i = 0. When ki belongs to the set ϑc,j, the utility is best described as:
+T H
+j,i = (biϕj,i −U comp
+j,i
+)Ij,i + (µbiϕj,i −U comm
+j,i
+)(1 −Ij,i)
+(7)
+Here, µbiϕj,i represents the intermediate cost paid by the server that completes ki,
+where µ is a universally recognized, preset constant parameter. The sum of the time
+spent is computed as
+KH
+j,i = Kcomp
+j,i
+Ij,i + Kcomm
+j,i
+(1 −Ij,i)
+(8)
+On the other hand, if ki does not belongs to the set ϑc,j, the utility is calculated as:
+T G
+i,j =
+
+(1 −µ)biϕj,i −U comp
+j,i
+
+Ij,i
+(9)
+and the total time consumption is:
+KG
+j,i = (Kcomp
+j,i
++ Kcomm
+j∗,i
+)Ij,i
+(10)
+where Kcomm
+j∗,i
+represents the transmission time of the server that submits ki. In light
+of this, the performance utility function and time usage may be summed up as follows:
+if ki ∈ϑc,j, then Tj,i = T H
+j,i, and Kj,i = KH
+j,i; otherwise, Tj,i = T G
+j,i, and Kj,i = KG
+j,i.
+4.4 Problem Statement
+Taking into account the goal of task distribution to achieve resource integration and
+best use in the system, the primary goal is to ensure the timely processing of a
+higher number of tasks, leading to increased rewards for the servers. This objective
+11
+can be formulated as a multi-task assignment optimization (MTAO) problem. The
+MTAO problem aims to allocate tasks efficiently by optimizing resource allocation
+and scheduling strategies to maximize task completion within given time constraints.
+By addressing this problem, the overall performance and efficiency of the system can
+be enhanced while promoting greater rewards for the participating servers.
+MTAO: argIj,i max Pn
+j=1
+Pm
+i=1 Tj,i
+such that,
+A1:
+m
+X
+i=1
+ϕj,iIj,i ≤ϕj,
+A2: Kj,i ≤ϑu,i,
+A3:
+m
+X
+i=1
+Ij,i ≤1,
+A4: j ∈{1, 2, ..., n},
+i ∈{1, 2, ..., m}, where 0 < m ≤n.
+The objective for optimization is to maximize the overall utility of the servers in
+response to the requested tasks from high-end mobile application users. There are
+several constraints to consider. Firstly, the constraint on computational power (A1)
+ensures that each server can properly process the chosen tasks. Secondly, constraint
+(A2) encompasses both the processing and transmission time, ensuring that each
+task can be finished within the allocated time frame[4]. Additionally, constraint (A3)
+ensures that there is only one server assigned to each task, allowing for the possibil-
+ity that some servers may not receive any tasks. Lastly, constraint (A4) defines the
+domain of the optimization problem. By addressing these constraints, the allocation
+of tasks can be optimized to maximize the overall utility of the servers in the context
+of high-end mobile applications.
+5 DDPG Based Solution For MTAO
+5.1 Problem Restructution
+To initiate the process, reframe the Multi-Task Allocation Optimization (MTAO)
+problem based on the Deep Deterministic Policy Gradient (DDPG) algorithm. State
+space, action space, and reward function are the three essential components of the
+DDPG algorithm, and they are elaborated in more detail.
+• State Space: The state space, denoted as λ < ϑ, B, M , ϑe >, represents the
+environment in which the agent operates. Here, ϑ refers to the set of tasks
+i.e., ϑ = {k1, k2, ..., km}, B represents the group of task-related unit costs i.e.,
+B = {b1, b2, ..., bm}, D denotes the collection of task data sizes i.e., M
+=
+{M1, M2, ..., Mm}, and ϑe denotes the set of execution time requirements for the
+tasks i.e., ϑe = {ve,1, ve,2, ..., ve,m}. Consequently, the state space encompasses
+12
+task descriptions, encompassing costs, data volumes, and execution time con-
+straints. Therefore, λ may be shown as a matrix with 4 columns and m rows,
+where m indicates the number of tasks. The agent chooses actions based on the
+demands of the current task and the servers’ resources.
+• Action Space: The action space, denoted as ˚A < C, Z, Q, L, O, Y, α, σ >, repre-
+sents the available actions that can be taken by the agent. It incorporates servers’
+resource capacities such as total available CPU cycles (Z) i.e., Z = {ϕ1, ϕ2, ..., ϕn},
+CPU frequencies (Q) i.e., Q = {q1, q2, ..., qn}, communication bandwidth (L) i.e.,
+L = {L1, L2, ..., Ln}, transmission power (O) i.e., O = {O1, O2, ..., On}, channel
+power gain (Y) i.e., Y = {Y1, Y2, ..., Yn}, CPU architecture parameter (α), and
+The number of CPU cycles needed to process one data sample (σ). An nx8 matrix
+makes up the action space, where n represents the number of servers. Each action
+can be selected or not selected, ensuring that each task is assigned to only one
+server.
+• Reward Function: The MTAO problem’s goal is to maximize utility by properly
+assigning the task to servers. The performance connected to the allocation choice,
+resource circumstances, and time limits defines the rewards here. The reward
+function is defined in terms of the performance achieved by allocating a task
+to a specific server. The rewards depend on whether the server has sufficient
+computing power and can complete the task within the specified time constraint.
+The reward function is formulated as follows:
+For ki ∈Kci, the reward function is:
+Tj,i =
+biϕj,i −U comp
+j,i
+, if ϕj,i ≤ϕj and Kj,i ≤ϑe,i
+µbiϕj,i −U comm
+j,i
+, otherwise
+(11)
+For ki /∈Kci, the reward function is:
+Tj,i =
+
+
+
+(1 −µ)biϕj,i −U comp
+j,i
+, if ϕj,i ≤ϕj and
+Kj,i ≤ϑe,i
+0,
+otherwise
+(12)
+Here, Tj,i denotes the utility associated with server ci processing task ki, bi shows
+the cost per CPU cycle in units, ϕj,i indicates the total number of CPU cycles
+needed to finish the task ki on server cj, U comp
+j,i
+signifies the energy consumption
+for computation, U comm
+j,i
+represents the energy consumption for data transmission,
+µ represents a predefined constant parameter, and Kj,i and ϑe,i denote the time
+consumption for task processing and the required time constraint for task ki,
+respectively.
+The average reward can be determined by using Bellman’s Equation[17]:
+Sϕ(λj, ˚Aj) = max
+
+T(λj, ˚Aj) + Sϕ(λj+1, ϕ(λj+1))
+
+(13)
+Based on the aforementioned analysis, the reward functions are derived by
+transforming the objective function while adhering to specific constraints. To
+13
+simplify the procedure, Algorithm 1 summarizes the calculation of reward func-
+tions. In order to obtain an n x m matrix T, which contains the reward value
+for each state and action {T1,1, T1,2, ..., Tj,i, ..., Tn,m}, it is necessary to compute
+the energy consumption and time cost associated with both the computing and
+communication processes.
+Algorithm 1 Algorithm for State Action Reward
+Input: λ, ˚A
+Output: T
+1: for j ∈{1, . . . , n} do
+2:
+for i ∈{1, . . . , m} do
+3:
+U j,i
+comp ←αiϕj,iq2
+j
+4:
+Kj,i
+comp ←ϕj,i
+qj
+5:
+Kj,i
+comm ←Mi
+nj
+6:
+if ci ∈Kcj then
+7:
+Kj,i ←Kj,i
+compIj,i + Kj,i
+comm(1 −Ij,i)
+8:
+if (ϕj,i ≤ϕj) and (Kj,i ≤ϑe,i) then
+9:
+Tj,i ←biϕj,i −U comp
+j,i
+10:
+else
+11:
+Tj,i ←λbiϕj,i −U comm
+j,i
+12:
+end if
+13:
+end if
+14:
+if ci /∈Kcj then
+15:
+Kj,i ←(Kcomp
+j,i
++ T comm
+j,∗i
+)Ij,i
+16:
+if (ϕj,i ≤ϕj) and (Kj,i ≤ϑe,i) then
+17:
+Tj,i ←(1 −µ)biϕj,i −U comp
+j,i
+18:
+else
+19:
+Tj,i ←0
+20:
+end if
+21:
+end if
+22:
+end for
+23: end for
+24: return T
+6 Task and Maximum Reward Allocation
+It is crucial to identify the set of activities achievable in each state before making a
+selection to avoid choosing servers that cannot perform particular jobs or actions and
+to increase learning efficiency by minimizing time complexity.
+DDPG, combines the benefits of deep neural networks and deterministic policy
+gradients, making it more suitable for continuous action spaces. By employing an
+actor-critic architecture and utilizing a continuous action policy, DDPG can effectively
+14
+learn in complex environments with continuous actions. It handles the challenge of
+high-dimensional action spaces by leveraging function approximation, allowing it to
+generalize and make better decisions.
+The agent uses the greedy algorithm as its policy and selects actions based on Q-
+values. The greedy strategy frequently favors choosing options with bigger expected
+rewards. Exploration and exploitation are balanced by the parameter ϵ. By adjusting
+the value of ϵ, the agent can exploit learned information with a higher value and explore
+unexplored actions with a lower value. The learning process involves multiple episodes
+to enhance the agent’s understanding of rewards and identify the most profitable
+solution.
+The agent travels through all states to find a solution in each learning episode,
+denoted by k ∈{1, 2, ..., K}, where K is the total number of episodes. It compares
+the total rewards obtained from different solutions and selects the solution, denoted
+as TS∗, with the greatest possible reward being the ideal outcome.
+By appropriately tuning the learning rate α and discount rate γ, practitioners can
+control the agent’s learning speed, stability, and ability to consider future rewards. It
+is important to select these hyperparameters carefully, taking into account the specific
+characteristics of the task and the desired learning behavior, to achieve effective and
+efficient learning in DDPG-based algorithms while avoiding issues such as convergence
+problems or suboptimal policies Algorithm 2 explains the maximum reward allocation
+for the Reinforcement Learning approach (DDPG)[1].
+DDPG incorporates experience replay and target networks to stabilize the learning
+process and reduce the correlation between consecutive samples, leading to improved
+convergence and performance. This makes DDPG a better choice when dealing with
+continuous action spaces, as it can handle complex tasks more efficiently and achieve
+higher-quality policies compared to Q-learning[9].
+15
+Algorithm 2 DDPG based Algorithm for Task Allocation with Maximum Reward
+Input: λ, ˚A, K, T, σ, S, α, γ, b, m, s, ϕ, q
+Output: Best task allocation list A∗with highest sum of rewards S∗
+1: Initialize DDPG actor and critic networks with random weights
+2: Initialize target actor and critic networks with the same weights as the original
+networks
+3: Set hyperparameters: learning rate α , discount factor γ, exploration noise φ, batch
+size x .
+4: Initialize replay buffer to store experiences
+5: Initialize the total number of episodes and time steps
+6: Initialize the highest sum of rewards S as a very small value
+7: while episode e < K do
+8:
+Reset the environment and observe the initial state λ
+9:
+Initialize the total reward for the episode
+10:
+Initialize an empty task allocation list ˚A
+11:
+while t < T do
+12:
+Select an action ˚At using the actor network and add exploration noise
+13:
+Execute the action and observe the next state λ′, reward R, and done flag
+14:
+Store the experience (λ, ˚Aj, R, λ′, done) in the replay buffer
+15:
+Sample a random batch of experiences from the replay buffer
+16:
+Compute the target Q-values using the target critic network
+17:
+Update the critic network by minimizing the mean squared Bellman error S
+18:
+Compute the gradients of the actor network using the sampled states and
+actions
+19:
+Update the actor network using the computed gradients
+20:
+Update the target networks by softly updating the target weights
+21:
+Update the current state λ and total reward
+22:
+Increment the time step t
+23:
+end while
+24:
+if total reward > S then
+25:
+S = total reward
+26:
+Store the current task allocation list A as the best allocation A∗
+27:
+end if
+28:
+Increment the episode counter
+29: end while
+30: return Best task allocation list A∗with highest sum of rewards S∗
+7 Results and Analysis
+7.1 Experimental Parameters
+Our experimental analysis considers a blockchain-based Mobile Edge Computing
+(MEC) system in high-end mobile applications. The method comprises 20 servers and
+involves 50 offloading tasks, serving as the primary setup for our study. The impact
+16
+of the number of servers and tasks on the overall rewards and time complexity of the
+MEC system by varying the relevant parameters is studied. Additionally, the influence
+of DDPG-based algorithm parameters on convergence behavior[11] is investigated. Our
+objective is to gain insights into the performance and behavior of the blockchain-based
+MEC system in the context of high-end mobile applications. The aim is to under-
+stand how different factors impact the system’s efficiency and effectiveness, ultimately
+contributing to the advancement of mobile computing technologies.
+Table 1: Experimental Parameters
+m = 20
+n = 50
+Mj = 200, 500
+σ = 0.01
+bj = 1, 10
+Mi = 10, 20
+ϑe,j = 1, 100
+γ = 0.5
+qj = 1, 10
+Oj = 10, 20
+Yj = 10, 20
+α = 0.01
+Lj = 10, 20
+δ = 0.01
+ϵ = 0.5
+K = 500
+7.2 Simulation Results
+In order to validate the efficiency of the suggested method based on the reinforcement
+learning algorithm for the MTAO (Multi-Task Allocation Optimization) problem, a
+series of experiments are conducted. The goal was to assess how well our learning-
+based solution performed against three benchmark algorithms: greedy, random, and
+Q-learning. While the greedy-based algorithm chooses the server with the highest pay-
+out for each work, the random allocation method distributes each task to a server
+at random. Execution of these four algorithms using varying numbers of servers and
+tasks to generate comparison results, as depicted in Figure 1 and Figure 2. It is evi-
+dent from the Figures that our Reinforcement Learning-based algorithm consistently
+outperforms the other three algorithms by achieving higher rewards. In contrast,
+the random strategy exhibits significant fluctuations due to the inherent random-
+ness involved in each selection. These findings provide strong evidence supporting the
+superior performance of the suggested algorithm in tackling the MTAO problem.
+On the other hand, the greedy and learning algorithms exhibit smoother perfor-
+mance. It might seem intuitive that having more servers would lead to higher total
+rewards while increasing the number of tasks would enhance overall revenue. However,
+the experimental results do not align with this expectation. There are at least three
+reasons for this discrepancy.
+Firstly, the allocation decisions are constrained by A1-A4, causing decision-making
+to be dynamic when the number of servers or task varies. As a result, the impact on
+rewards does not accumulate linearly.
+Secondly, although more tasks can potentially yield higher rewards, they also incur
+additional costs in terms of computation and communication. These costs offset the
+revenue gains.
+Thirdly, the heterogeneous nature of servers and tasks, characterized by varying
+parameters, exacerbates the outcomes influenced by the first two reasons.
+In summary, the results challenge the common notion that increasing the number of
+servers or tasks directly translates to higher rewards or revenue. The intricate interplay
+17
+of constraints, costs, and heterogeneity within the system necessitates a more nuanced
+understanding of the dynamics involved
+Fig. 1: Increase in rewards with the increase in MEC servers
+Fig. 2: Increase in rewards with the increase in offloading task
+Subsequently, offloading tasks’ effects on unit costs and data quantities on total
+rewards are investigated. By increasing the values of bj (unit prices) and Mj (data
+sizes) by varying percentages from 10% to 100%, Figures 3 and 4 show the outcomes,
+which clearly show an impact on overall rewards. Users contribute more to the sys-
+tem when unit prices are higher, which raises the overall incentives. Similarly, larger
+data sizes of tasks ki require more CPU cycles for processing, leading to higher total
+rewards. These findings emphasize the significance of unit prices and data sizes in shap-
+ing the rewards obtained in the system. Understanding the relationship between these
+18
+factors and the overall rewards can inform resource allocation and decision-making
+processes for optimal outcomes.
+Fig. 3: Increase in percentage of unit price with increase in rewards
+Fig. 4: Increase in percentage of data size with increase in rewards
+In the context of the experiment, the end-to-end delay in the Deep Deterministic
+Policy Gradient (DDPG) algorithm is investigated and compared to the Q-learning
+algorithm. The study involved conducting multiple episodes, with the number of
+episodes at 500. Findings revealed that the DDPG algorithm exhibited significantly
+lower end-to-end delay compared to the learning algorithm.
+The observed reduction in end-to-end delay can be attributed to the inherent advan-
+tages of the DDPG algorithm, which leverages continuous action spaces and utilizes
+19
+an actor-critic architecture. This enables the agent to make more precise and efficient
+decisions in allocating tasks to servers within the system. Consequently, the DDPG
+algorithm demonstrates superior performance in minimizing end-to-end delay, leading
+to improved overall system efficiency.
+These results depicted in Figure 5 provide scientific evidence of the effectiveness of the
+DDPG algorithm in addressing the end-to-end delay challenge and highlight its poten-
+tial for enhancing the performance of learning-based algorithms in similar scenarios.
+Fig. 5: End-to-End delay comparison
+The learning algorithm’s performance in terms of convergence is a key focus of
+our analysis, particularly in the context of DDPG, which is influenced by two crucial
+variables: α (learning rate) and γ (discount factor). Examining Figure 6, it is evident
+Fig. 6: The Learning rate α decreased by a factor of 0.01
+20
+that a smaller α value results in decisions being predominantly influenced by past
+experiences, limiting the exploration of alternative choices. Although this may yield
+initial high payoffs, it hampers the effectiveness of convergence. On the other hand,
+as depicted in Figure 7, a larger γ value leads to improved convergence. This can be
+attributed to the fact that α considers the impact of future rewards on present choices.
+Consequently, increasing γ places greater emphasis on rewards, facilitating more effi-
+cient learning of optimal combinations and accelerating the convergence process. These
+findings underscore the importance of carefully tuning the parameters α and γ in
+DDPG to achieve desired convergence rates, as it enables enhanced decision-making
+and faster convergence towards optimal solutions.
+Fig. 7: The Discount factor γ increased by a factor of 0.5
+8 Conclusion
+The incorporation of blockchain technology into Mobile Edge Computing (MEC)
+systems has demonstrated tremendous potential in tackling fundamental difficulties
+in resource sharing and optimization, especially for high-end applications such as
+AR, VR, Robotic arm surgery, etc. The blockchain-based MEC system introduced in
+this paper presents a task distribution mechanism that makes it possible to allocate
+tasks across the network effectively and efficiently. This system is built to increase
+the system’s overall efficiency and optimize resource usage. This system uses the
+Deep Deterministic Policy Gradient (DDPG) algorithm, a reinforcement learning-
+based strategy that enables effective task allocation decision-making. The DDPG
+algorithm is created to develop the best policy for task distribution while taking into
+account a number of variables, including network circumstances, task needs, and
+resource availability. As a result, the system is able to make judgments that maximize
+resource usage and cut down on task completion time. Extensive experiments have
+been used to validate the proposed system’s and algorithms’ efficacy and efficiency.
+21
+Their potential to improve resource usage and optimize the assignment of tasks in
+MEC situations is supported by the outcomes. This optimizes the efficiency of the
+MEC system overall as well as the performance of specific jobs. Additionally, the task
+allocation procedure is transparent and secure because of the usage of blockchain
+technology. This may boost user and provider confidence and encourage wider accep-
+tance and use of MEC systems.
+Acknowledgments.
+The author would like to express sincere gratitude to Dr. Sak-
+shi Kaushal and Ms. Amita Chauhan for their support and valuable suggestions that
+helped to improve and evaluate this paper.
+Declarations
+• Conflict of interest The authors declare that they have no conflict of interest.
+• Availability of data and materials The data and code generated in this study
+are available upon request and are subject to access on a permission basis. For
+inquiries regarding data access, please contact shreydhiman99@gmail.com with
+the specific details of your request. We will endeavor to accommodate reasonable
+requests for access to the data in a manner that aligns with ethical and privacy
+considerations.
+References
+[1]
+Yueyue Dai et al. “Artificial intelligence empowered edge computing and caching
+for internet of vehicles”. In: IEEE Wireless Communications 26.3 (2019), pp. 12–
+18.
+[2]
+Shrey Dhiman et al. “Computation Offloading in Mobile Edge Computing for
+Next Generation Networks: A deep reinforcement learning approach”. In: 2023
+International Conference for Advancement in Technology (ICONAT). IEEE.
+2023, pp. 1–8.
+[3]
+Hoang T Dinh et al. “A survey of mobile cloud computing: architecture, appli-
+cations, and approaches”. In: Wireless communications and mobile computing
+13.18 (2013), pp. 1587–1611.
+[4]
+Weiwei Fang et al. “OKRA: optimal task and resource allocation for energy min-
+imization in mobile edge computing systems”. In: Wireless Networks 25 (2019),
+pp. 2851–2867.
+[5]
+Jie Feng et al. “Cooperative computation offloading and resource allocation
+for blockchain-enabled mobile-edge computing: A deep reinforcement learning
+approach”. In: IEEE Internet of Things Journal 7.7 (2019), pp. 6214–6228.
+[6]
+Zhuoer Hu et al. “Joint optimization for mobile edge computing-enabled
+blockchain systems: A deep reinforcement learning approach”. In: Sensors 22.9
+(2022), p. 3217.
+22
+[7]
+Srinivas Jangirala, Ashok Kumar Das, and Athanasios V Vasilakos. “Design-
+ing secure lightweight blockchain-enabled RFID-based authentication protocol
+for supply chains in 5G mobile edge computing environment”. In: IEEE
+Transactions on Industrial Informatics 16.11 (2019), pp. 7081–7093.
+[8]
+Yang Jian et al. “A Mobile Edge Computing Enabled Spectrum Blockchain
+for the Internet of Spectrum Devices”. In: 12th EAI International Conference
+on Mobile Multimedia Communications, Mobimedia 2019, 29th-30th Jun 2019,
+Weihai, China. 2019.
+[9]
+Kai Jiang et al. “A q-learning based method for energy-efficient computation
+offloading in mobile edge computing”. In: 2020 29th International Conference
+on Computer Communications and Networks (ICCCN). IEEE. 2020, pp. 1–7.
+[10]
+C¸etin Kaya Ko¸c et al. “Rivest-shamir-adleman algorithm”. In: Partially Homo-
+morphic Encryption (2021), pp. 37–41.
+[11]
+Dohyun Kwon et al. “Multiagent DDPG-based deep learning for smart ocean
+federated learning IoT networks”. In: IEEE Internet of Things Journal 7.10
+(2020), pp. 9895–9903.
+[12]
+Xunqiang Lan et al. “Blockchain-secured data collection for uav-assisted iot: A
+ddpg approach”. In: 2021 IEEE Global Communications Conference (GLOBE-
+COM). IEEE. 2021, pp. 1–6.
+[13]
+Shuyun Luo et al. “Deep Learning and Blockchain with Edge Computing
+for 5G-Enabled Drone Identification and Flight Mode Detection”. In: IEEE
+NETWORK 35.1 (2021), pp. 124–129.
+[14]
+Dinh C Nguyen et al. “Federated learning meets blockchain in edge computing:
+Opportunities and challenges”. In: IEEE Internet of Things Journal 8.16 (2021),
+pp. 12806–12825.
+[15]
+Dinh C Nguyen et al. “Intelligent blockchain-based edge computing via deep
+reinforcement learning: Solutions and challenges”. In: IEEE Network 36.6
+(2022), pp. 12–19.
+[16]
+Dinh C Nguyen et al. “Latency optimization for blockchain-empowered federated
+learning in multi-server edge computing”. In: IEEE Journal on Selected Areas
+in Communications 40.12 (2022), pp. 3373–3390.
+[17]
+Brendan O’Donoghue et al. “The uncertainty bellman equation and explo-
+ration”. In: International Conference on Machine Learning. 2018, pp. 3836–
+3845.
+[18]
+Jorge Pe˜na Queralta and Tomi Westerlund. “Blockchain for mobile edge comput-
+ing: Consensus mechanisms and scalability”. In: Mobile edge computing (2021),
+pp. 333–357.
+[19]
+MD Abdur Rahman et al. “Blockchain-based mobile edge computing framework
+for secure therapy applications”. In: IEEE access 6 (2018), pp. 72469–72478.
+[20]
+Nicholas Stifter, Aljosha Judmayer, and Edgar Weippl. “Revisiting practical
+byzantine fault tolerance through blockchain technologies”. In: Security and
+Quality in Cyber-Physical Systems Engineering: With Forewords by Robert M.
+Lee and Tom Gilb (2019), pp. 471–495.
+23
+[21]
+Tuyen X Tran and Dario Pompili. “Joint task offloading and resource allocation
+for multi-server mobile-edge computing networks”. In: IEEE Transactions on
+Vehicular Technology 68.1 (2018), pp. 856–868.
+[22]
+Yitong Wang and Jun Zhao. “Mobile edge computing, metaverse, 6G wireless
+communications, artificial intelligence, and blockchain: Survey and their con-
+vergence”. In: 2022 IEEE 8th World Forum on Internet of Things (WF-IoT).
+IEEE. 2022, pp. 1–8.
+[23]
+Yitong Wang and Jun Zhao. “Mobile edge computing, metaverse, 6G wireless
+communications, artificial intelligence, and blockchain: Survey and their con-
+vergence”. In: 2022 IEEE 8th World Forum on Internet of Things (WF-IoT).
+IEEE. 2022, pp. 1–8.
+[24]
+Zhilin Wang et al. “Incentive mechanism design for joint resource allocation in
+blockchain-based federated learning”. In: IEEE Transactions on Parallel and
+Distributed Systems 34.5 (2023), pp. 1536–1547.
+[25]
+Yuan Wu et al. “Optimal computational power allocation in multi-access mobile
+edge computing for blockchain”. In: Sensors 18.10 (2018), p. 3472.
+[26]
+Zehui Xiong et al. “When mobile blockchain meets edge computing”. In: IEEE
+Communications Magazine 56.8 (2018), pp. 33–39.
+[27]
+Jinliang Xu et al. “A blockchain-enabled trustless crowd-intelligence ecosystem
+on mobile edge computing”. In: IEEE Transactions on Industrial Informatics
+15.6 (2019), pp. 3538–3547.
+[28]
+Xiaolong Xu et al. “Concurrent practical byzantine fault tolerance for integration
+of blockchain and supply chain”. In: ACM Transactions on Internet Technology
+(TOIT) 21.1 (2021), pp. 1–17.
+[29]
+Xinzhe Zheng et al. “Resource allocation on blockchain enabled mobile edge
+computing system”. In: Electronics 11.12 (2022), p. 1869.
+24
+

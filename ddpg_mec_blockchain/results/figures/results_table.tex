@@ -1,0 +1,16 @@
+\begin{table}[ht]
+\centering
+\caption{Comparative performance (mean\,$\pm$\,std, 3 seeds, 20 servers, 50 tasks)}
+\label{tab:results}
+\begin{tabular}{lcccc}
+\toprule
+Algorithm & Cumulative Reward & End-to-End Delay (s) & Energy (J) & Throughput \\
+\midrule
+DDPG (Ours) & \textbf{4.646 $\pm$ 2.170} & 0.131 $\pm$ 0.040 & \textbf{0.426 $\pm$ 0.472} & 0.677 $\pm$ 0.165 \\
+TD3 & 3.836 $\pm$ 2.658 & 0.097 $\pm$ 0.026 & 1.883 $\pm$ 2.468 & 0.816 $\pm$ 0.095 \\
+Q-Learning & 3.412 $\pm$ 2.196 & 0.084 $\pm$ 0.007 & 2.523 $\pm$ 0.963 & 0.861 $\pm$ 0.027 \\
+Greedy & 3.302 $\pm$ 2.478 & \textbf{0.082 $\pm$ 0.018} & 2.429 $\pm$ 2.045 & \textbf{0.872 $\pm$ 0.070} \\
+Random & 3.213 $\pm$ 2.081 & 0.086 $\pm$ 0.005 & 2.529 $\pm$ 0.205 & 0.853 $\pm$ 0.015 \\
+\bottomrule
+\end{tabular}
+\end{table}
