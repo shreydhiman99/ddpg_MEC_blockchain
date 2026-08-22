@@ -7,7 +7,7 @@ system utility, with optional on-chain logging of allocation decisions via a
 Solidity smart contract. Implements the experiments behind the paper
 *"Optimizing Resource Sharing in Blockchain-based Mobile Edge Computing
 through Reinforcement Learning: A DDPG Approach"* (submitted to MTAP,
-Springer).
+Springer (under review)).
 
 ## Architecture
 
@@ -194,5 +194,4 @@ training still works without it.
 DDPG (with the attention actor) reaches mean reward ≈ 19.3 ± 0.6 with
 throughput 1.0 and average delay ≈ 0.041s on the default 20-server/50-task
 setting, outperforming Q-Learning, Greedy, and Random baselines and matching
-TD3. See `results/figures/` for the full per-figure comparisons and
-`paper_text.txt` (repo root) for the write-up.
+TD3. See `results/figures/`.
